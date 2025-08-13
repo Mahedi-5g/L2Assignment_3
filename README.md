@@ -16,7 +16,7 @@ It supports managing books, borrowing operations, validations, filtering, and mo
 
 ## 🔧 Installation & Setup
 
-git clone https://github.com/Apollo-Level2-Web-Dev/B5A3.git
+git clone https://github.com/Mahedi-5g/L2Assignment_3
 cd B5A3
 npm install
 npm run dev
