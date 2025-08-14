@@ -1,95 +1,104 @@
-# 📚 LIBRARY MANAGEMENT API — B5A3 ASSIGNMENT
+# 📚 Library Management API — B5A3 Assignment
 
-This is an API for managing a Library System, built using **Express.js**, **TypeScript**, **MongoDB**, and **Mongoose**.  
-It supports managing books, borrowing operations, validations, filtering, and more — according to specific assignment guidelines.
+An API for managing a **Library System** built using **Express.js**, **TypeScript**, **MongoDB**, and **Mongoose**.  
+Supports **books management**, **borrowing system**, validations, filtering, and more — according to assignment requirements.
 
+---
 
+## 🛠 Tech Stack
+- **Backend Framework:** Node.js + Express.js
+- **Language:** TypeScript
+- **Database:** MongoDB + Mongoose
+- **Validation:** Zod
+- **Architecture:** RESTful API
 
-## 📦 Tech Stack
-- Node.js + Express.js
-- TypeScript
-- MongoDB with Mongoose
-- Zod
-- RESTful API principles
+---
 
+## ⚙️ Installation & Setup
 
-
-## 🔧 Installation & Setup
-
+### 1️⃣ Clone Repository
+```bash
 git clone https://github.com/Mahedi-5g/L2Assignment_3
-cd B5A3
-npm install
-npm run dev
-Make sure you have a .env file with:
+cd L2Assignment_3
+```
 
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Environment Variables
+Create a `.env` file in the project root:
+```
 MONGODB_URI=your-mongodb-uri
 PORT=5000
-📘 API Features
-📗 Book Schema Fields
-title (string) — required
+```
 
-author (string) — required
+### 4️⃣ Run in Development Mode
+```bash
+npm run dev
+```
 
-genre (string) — required; must be one of: Fiction, Non-fiction, Science, History, Biography
+### 5️⃣ Build for Production
+```bash
+npm run build
+npm start
+```
 
-isbn (string) — required; must be unique
+---
 
-copies (number) — required; must be a non-negative integer
+## 📘 API Documentation
 
-available (boolean) — optional; defaults to true
+### 📗 **Book Schema Fields**
+| Field       | Type     | Required | Notes |
+|-------------|----------|----------|-------|
+| title       | string   | ✅       | Book title |
+| author      | string   | ✅       | Author name |
+| genre       | string   | ✅       | One of: Fiction, Non-fiction, Science, History, Biography |
+| isbn        | string   | ✅       | Unique |
+| copies      | number   | ✅       | Must be ≥ 0 |
+| available   | boolean  | ❌       | Defaults to `true` |
 
-Mongoose Features:
+---
 
-Schema validation
+### 📘 **Borrow Schema Fields**
+| Field       | Type     | Required | Notes |
+|-------------|----------|----------|-------|
+| book        | ObjectId | ✅       | References Book |
+| quantity    | number   | ✅       | Must be ≤ available copies |
+| dueDate     | date     | ✅       | Borrow return date |
 
-Custom static/instance methods
+**Logic:**
+- Borrowing decreases available copies.
+- Prevents borrowing more than available stock.
 
-Middleware (pre or post) logic
+---
 
-📘 Borrow Schema Fields
-book (ObjectId) — references Book
+## 🚀 API Endpoints
 
-quantity (number) — required
+### 📚 **Books**
+| Method | Endpoint          | Description |
+|--------|------------------|-------------|
+| POST   | `/api/books`     | Create a new book |
+| GET    | `/api/books`     | Get all books |
+| GET    | `/api/books/:id` | Get book by ID |
+| PATCH  | `/api/books/:id` | Update book |
+| DELETE | `/api/books/:id` | Delete book |
 
-dueDate (date) — required
+✅ Supports **filtering**, **pagination**, and **sorting**.
 
-Logic:
+---
 
-Ensures that borrowing a book reduces available copies
+### 📖 **Borrowing**
+| Method | Endpoint        | Description |
+|--------|----------------|-------------|
+| POST   | `/api/borrow`  | Borrow a book |
+| GET    | `/api/borrow`  | List all borrow records |
 
-Prevents borrowing more than available
+---
 
-🚀 API Endpoints
-Books
-Method	Endpoint	Description
-POST	/api/books	Create a new book
-GET	/api/books	Get all books
-GET	/api/books/:id	Get single book by ID
-PATCH	/api/books/:id	Update book by ID
-DELETE	/api/books/:id	Delete book by ID
-
-✅ Supports filtering (by genre, author, etc.), pagination, and sorting.
-
-Borrowing
-Method	Endpoint	Description
-POST	/api/borrow	Borrow a book
-GET	/api/borrow	List all borrow records
-
-⚙️ Functional Requirements
-✅ Mongoose schema-level validation
-
-✅ Custom static/instance method
-
-✅ Mongoose middleware (pre, post)
-
-✅ Error handling and proper response format
-
-✅ Aggregation pipeline for advanced querying
-
-✅ Filtering and search by genre/author/etc.
-
-❗ Error Response Format
-
+## ❗ Error Response Format
+```json
 {
   "success": false,
   "message": "Validation Error",
@@ -99,22 +108,20 @@ GET	/api/borrow	List all borrow records
     ]
   }
 }
+```
 
-📄 License
-This project is for academic use only under the Apollo Level 2 Web Development course.
+---
+
+## 👨‍🏫 Assignment Requirements Covered
+- ✅ Field validations (Zod + Mongoose)
+- ✅ Business logic for copies & borrowing
+- ✅ Mongoose middleware (pre, post)
+- ✅ Custom static/instance methods
+- ✅ Filtering & aggregation pipeline
+- ✅ Proper REST API structure & error handling
+
+---
+
+## 📜 License
+This project is for **academic purposes** under the Apollo Level 2 Web Development course.  
 All rights reserved.
-
-👨‍🏫 Assignment Guidelines Followed
-Field validations (Zod/Mongoose)
-
-Business logic for copies and borrowing
-
-Middleware + methods in Mongoose
-
-Filtering & aggregation pipeline
-
-RESTful endpoints and response structure
-
-🤝 Contributing
-This is an educational project. Pull requests are not expected unless collaborating for learning purposes.
-
